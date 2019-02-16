@@ -6,9 +6,6 @@ import com.android.hellogold.test.data.network.IApiHelper;
 import com.android.hellogold.test.data.network.RxErrorHandlingCallAdapterFactory;
 import com.android.hellogold.test.di.qualifiers.ApplicationContext;
 import com.android.hellogold.test.di.scopes.ApplicationScope;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParser;
-import com.orhanobut.logger.Logger;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
@@ -29,7 +26,7 @@ import static com.android.hellogold.test.data.network.IApiHelper.Factory.NETWORK
 public class ApiModule {
 
 
-    public static final String URL = "https://staging.hellogold.com/api";
+    public static final String URL = "https://cws.hellogold.com/api/";
 
     public ApiModule() {
     }
@@ -63,53 +60,10 @@ public class ApiModule {
 
     @Provides
     @ApplicationScope
-    public HttpLoggingInterceptor httpLoggingInterceptor(HttpLoggingInterceptor.Logger logger) {
-        HttpLoggingInterceptor logging = new HttpLoggingInterceptor(logger);
+    public HttpLoggingInterceptor httpLoggingInterceptor() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(
                 BuildConfig.DEBUG ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
         return logging;
-    }
-
-    @Provides
-    @ApplicationScope
-    HttpLoggingInterceptor.Logger provideLogger() {
-
-        if (BuildConfig.DEBUG) {
-            return new HttpLoggingInterceptor.Logger() {
-                private StringBuilder mMessage = new StringBuilder();
-
-                @Override
-                public void log(String message) {
-                    try {
-                        if (message.startsWith("--> POST") || message.startsWith("--> GET")) {
-
-                            mMessage.append(message.concat("\n"));
-                        }
-                        if ((message.startsWith("{") && message.endsWith("}"))
-                                || (message.startsWith("[") && message.endsWith("]"))) {
-                            message = new GsonBuilder()
-                                    .setPrettyPrinting()
-                                    .create()
-                                    .toJson(new JsonParser().parse(message));
-                            mMessage.append(message.concat("\n"));
-                            Logger.d(mMessage.toString());
-                            mMessage.setLength(0);
-                        }
-                        if (message.contains("UnknownHostException") ||
-                                message.contains("timeout") ||
-                                message.contains("Bad Request")) {
-                            mMessage.append(message.concat("\n"));
-                            Logger.d(mMessage.toString());
-                            mMessage.setLength(0);
-                        }
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-        }
-        return message -> {
-        };
     }
 }

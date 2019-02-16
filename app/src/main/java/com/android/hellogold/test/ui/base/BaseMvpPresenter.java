@@ -1,6 +1,8 @@
 package com.android.hellogold.test.ui.base;
 
 import android.content.Context;
+import com.android.hellogold.test.data.ErrorAction;
+import com.android.hellogold.test.data.IAppErrorHelper;
 import com.android.hellogold.test.data.IDataManager;
 import com.android.hellogold.test.di.qualifiers.ApplicationContext;
 import io.reactivex.annotations.NonNull;
@@ -14,6 +16,7 @@ public abstract class BaseMvpPresenter<V extends BaseView> implements BasePresen
     @ApplicationContext
     protected final Context mAppContext;
     protected IDataManager mDataManager;
+    protected IAppErrorHelper mAppErrorHelper;
     protected CompositeDisposable disposableSubscription = new CompositeDisposable();
     WeakReference<V> mViewWeak;
 
@@ -23,6 +26,7 @@ public abstract class BaseMvpPresenter<V extends BaseView> implements BasePresen
     public BaseMvpPresenter(IDataManager dataManager) {
         mDataManager = dataManager;
         this.mAppContext = mDataManager.getApplicationContext();
+        this.mAppErrorHelper = mDataManager.getAppErrorHelper();
     }
 
     @Override
@@ -74,5 +78,22 @@ public abstract class BaseMvpPresenter<V extends BaseView> implements BasePresen
     @Override
     public void onDestroyView() {
         disposableSubscription.clear();
+    }
+
+
+    public void handleApiError(Throwable throwable, int messageStyle) {
+        ErrorAction action = mAppErrorHelper.handleAppException(throwable);
+        handleErrorAction(messageStyle, action);
+    }
+
+    protected void handleErrorAction(int messageStyle, ErrorAction action) {
+        switch (action.getActionType()) {
+            case ErrorAction.ACTION_TYPE_SHOW_ERROR:
+                getView().showError(action.getMessageContent(), messageStyle);
+                break;
+            case ErrorAction.ACTION_TYPE_DESTROY_VIEW:
+                getView().destroyView();
+                break;
+        }
     }
 }

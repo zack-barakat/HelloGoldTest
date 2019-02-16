@@ -3,6 +3,7 @@ package com.android.hellogold.test.di.component;
 import android.app.Application;
 import android.content.Context;
 import com.android.hellogold.test.App;
+import com.android.hellogold.test.data.IAppErrorHelper;
 import com.android.hellogold.test.data.IDataManager;
 import com.android.hellogold.test.di.module.ApiModule;
 import com.android.hellogold.test.di.module.ApplicationModule;
@@ -27,6 +28,8 @@ public interface ApplicationComponent {
     Application application();
 
     IDataManager getDataManager();
+
+    IAppErrorHelper getErrorHelper();
 
     @Component.Builder
     interface Builder {
