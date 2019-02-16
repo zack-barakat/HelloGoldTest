@@ -12,6 +12,10 @@ import javax.inject.Inject
 
 interface IUserRepository {
     fun registerUser(registerPayload: RegisterPayload): Observable<RegisterResponse>
+
+    fun isUserLoggedIn(): Observable<Boolean>
+
+    fun getUserEmail(): String?
 }
 
 @ApplicationScope
@@ -24,5 +28,22 @@ open class UserRepository @Inject constructor(
 
     override fun registerUser(registerPayload: RegisterPayload): Observable<RegisterResponse> {
         return apiHelper.registerUser(registerPayload)
+            .map { response ->
+                if (response.isSuccess) {
+                    preferencesHelper.setEmail(registerPayload.email)
+                    preferencesHelper.setApiKey(response.data?.apiKey)
+                    preferencesHelper.setApiToken(response.data?.apiToken)
+                    preferencesHelper.setUserLoggedIn(true)
+                }
+                response
+            }
+    }
+
+    override fun isUserLoggedIn(): Observable<Boolean> {
+        return Observable.just(preferencesHelper.isUserLoggedIn())
+    }
+
+    override fun getUserEmail(): String? {
+        return preferencesHelper.getEmail()
     }
 }

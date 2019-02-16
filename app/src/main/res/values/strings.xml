@@ -5,4 +5,9 @@
     <string name="message_error_unknown">Something went wrong</string>
     <string name="message_connection_error">Your connection seems lost</string>
     <string name="message_connect_internet">Connect to the internet</string>
+
+    <string name="text_register">Register</string>
+    <string name="text_email">Email</string>
+    <string name="text_is_tnc">Is TNC</string>
+    <string name="error_email_not_valid">Email not valid</string>
 </resources>

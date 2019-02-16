@@ -34,7 +34,10 @@ data class RegisterResponse(
     var code: String?,
     var message: String?,
     var data: RegisterResponseData?
-) : Parcelable
+) : Parcelable {
+
+    val isSuccess = result.equals("ok", ignoreCase = true)
+}
 
 @Parcelize
 data class RegisterResponseData(

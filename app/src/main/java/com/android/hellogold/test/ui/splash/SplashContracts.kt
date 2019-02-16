@@ -7,6 +7,8 @@ interface SplashContracts {
 
     interface View : BaseView {
         fun showMainScreen()
+
+        fun showRegisterScreen()
     }
 
     interface Presenter<V : View> : BasePresenter<V>
