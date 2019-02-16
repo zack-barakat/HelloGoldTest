@@ -4,6 +4,8 @@ import android.content.Context;
 import com.android.hellogold.test.data.ErrorAction;
 import com.android.hellogold.test.data.IAppErrorHelper;
 import com.android.hellogold.test.data.IDataManager;
+import com.android.hellogold.test.data.repositories.IPriceRepository;
+import com.android.hellogold.test.data.repositories.IUserRepository;
 import com.android.hellogold.test.di.qualifiers.ApplicationContext;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -17,6 +19,8 @@ public abstract class BaseMvpPresenter<V extends BaseView> implements BasePresen
     protected final Context mAppContext;
     protected IDataManager mDataManager;
     protected IAppErrorHelper mAppErrorHelper;
+    protected IUserRepository mUserRepository;
+    protected IPriceRepository mPriceRepository;
     protected CompositeDisposable disposableSubscription = new CompositeDisposable();
     WeakReference<V> mViewWeak;
 
@@ -27,6 +31,8 @@ public abstract class BaseMvpPresenter<V extends BaseView> implements BasePresen
         mDataManager = dataManager;
         this.mAppContext = mDataManager.getApplicationContext();
         this.mAppErrorHelper = mDataManager.getAppErrorHelper();
+        this.mUserRepository = mDataManager.getUserRepository();
+        this.mPriceRepository = mDataManager.getPriceRepository();
     }
 
     @Override
