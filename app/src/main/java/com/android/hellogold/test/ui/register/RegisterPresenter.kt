@@ -28,7 +28,7 @@ constructor(dataManager: IDataManager) : BaseMvpPresenter<RegisterContracts.View
             .registerUser(RegisterPayload(email = email, data = generatedRandomString, tnc = tnc))
             .subscribe({ response ->
                 view.hideProgress()
-                if (response.isSuccess) {
+                if (response.isSuccess()) {
                     view.openMainScreen()
                 } else {
                     view.hideProgress()
