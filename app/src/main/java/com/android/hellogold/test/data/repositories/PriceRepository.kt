@@ -1,6 +1,7 @@
 package com.android.hellogold.test.data.repositories
 
 import android.content.Context
+import com.android.hellogold.test.data.model.GoldPrice
 import com.android.hellogold.test.data.model.SpotPriceResponse
 import com.android.hellogold.test.data.network.IApiHelper
 import com.android.hellogold.test.data.prefs.IPreferencesHelper
@@ -11,6 +12,8 @@ import javax.inject.Inject
 
 interface IPriceRepository {
     fun getSpotPrice(): Observable<SpotPriceResponse>
+
+    fun getGoldPrices(): List<GoldPrice>
 }
 
 @ApplicationScope
@@ -20,7 +23,20 @@ open class PriceRepository @Inject constructor(
     private val apiHelper: IApiHelper
 ) : IPriceRepository {
 
+    private val prices = arrayListOf<GoldPrice>()
+
     override fun getSpotPrice(): Observable<SpotPriceResponse> {
         return apiHelper.spotPrice
+            .doOnNext {
+                if (it.isSuccess()) {
+                    it.goldPrice?.let { goldPrice ->
+                        prices.add(goldPrice)
+                    }
+                }
+            }
+    }
+
+    override fun getGoldPrices(): List<GoldPrice> {
+        return prices.sortedByDescending { it.getTimestampDate() }
     }
 }

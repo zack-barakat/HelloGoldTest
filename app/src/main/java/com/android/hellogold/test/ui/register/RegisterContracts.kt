@@ -8,7 +8,7 @@ interface RegisterContracts {
     interface View : BaseView {
         fun showEmailError(error: String)
 
-        fun openMainScreen()
+        fun openDashboardScreen()
     }
 
     interface Presenter<V : View> : BasePresenter<V> {

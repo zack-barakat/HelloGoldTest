@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:paddingStart="@dimen/common_ui_padding"
+        android:paddingEnd="@dimen/common_ui_padding"
+        tools:background="@android:color/white">
+
+    <TextView
+            android:id="@+id/tvSpotPrice"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:textColor="@color/primaryTextLight"
+            tools:text="@string/text_gold_price_per_gram"/>
+
+    <TextView
+            android:id="@+id/tvPriceDate"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingStart="@dimen/common_ui_padding_small"
+            android:paddingEnd="@dimen/common_ui_padding_small"
+            android:textColor="@color/secondaryTextLight"
+            tools:text="12 Feb "/>
+
+</RelativeLayout>

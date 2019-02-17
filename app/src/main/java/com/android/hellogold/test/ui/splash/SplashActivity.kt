@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.android.hellogold.test.R
 import com.android.hellogold.test.ui.base.BaseMvpActivity
 import com.android.hellogold.test.ui.base.BasePresenter
+import com.android.hellogold.test.ui.dashboard.DashboardActivity
 import com.android.hellogold.test.ui.register.RegisterActivity
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
@@ -33,8 +34,8 @@ class SplashActivity : BaseMvpActivity(), SplashContracts.View {
         return mPresenter
     }
 
-    override fun showMainScreen() {
-
+    override fun showDashboardScreen() {
+        startActivity<DashboardActivity>()
     }
 
     override fun showRegisterScreen() {

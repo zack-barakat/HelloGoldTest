@@ -10,4 +10,7 @@
     <string name="text_email">Email</string>
     <string name="text_is_tnc">Is TNC</string>
     <string name="error_email_not_valid">Email not valid</string>
+    <string name="text_gold_price_per_gram">RM%s/g</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="text_refresh_price">Refresh price</string>
 </resources>

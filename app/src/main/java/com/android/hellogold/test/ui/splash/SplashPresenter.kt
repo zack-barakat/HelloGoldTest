@@ -13,7 +13,7 @@ constructor(dataManager: IDataManager) : BaseMvpPresenter<SplashContracts.View>(
         val disposable = mUserRepository.isUserLoggedIn()
             .subscribe({ isLoggedIn ->
                 if (isLoggedIn) {
-                    getView().showMainScreen()
+                    getView().showDashboardScreen()
                 } else {
                     getView().showRegisterScreen()
                 }

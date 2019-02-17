@@ -6,7 +6,7 @@ import com.android.hellogold.test.ui.base.BaseView
 interface SplashContracts {
 
     interface View : BaseView {
-        fun showMainScreen()
+        fun showDashboardScreen()
 
         fun showRegisterScreen()
     }

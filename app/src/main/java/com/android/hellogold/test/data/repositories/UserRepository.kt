@@ -29,7 +29,7 @@ open class UserRepository @Inject constructor(
     override fun registerUser(registerPayload: RegisterPayload): Observable<RegisterResponse> {
         return apiHelper.registerUser(registerPayload)
             .map { response ->
-                if (response.isSuccess) {
+                if (response.isSuccess()) {
                     preferencesHelper.setEmail(registerPayload.email)
                     preferencesHelper.setApiKey(response.data?.apiKey)
                     preferencesHelper.setApiToken(response.data?.apiToken)
