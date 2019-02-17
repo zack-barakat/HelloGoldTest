@@ -29,7 +29,7 @@ constructor(dataManager: IDataManager) : BaseMvpPresenter<RegisterContracts.View
             .subscribe({ response ->
                 view.hideProgress()
                 if (response.isSuccess()) {
-                    view.openMainScreen()
+                    view.openDashboardScreen()
                 } else {
                     view.hideProgress()
                 }

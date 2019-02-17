@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+            android:id="@+id/tvEmail"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorAccent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/common_ui_padding_small"
+            android:padding="@dimen/common_ui_padding"
+            tools:text="Hello Zakarya@gmail.com"/>
+
+
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshPricesLayout"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvPricesHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_gold_price"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <Button
+            android:id="@+id/btnRefreshPrice"
+            style="@style/AccentButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/common_ui_padding"
+            android:layout_height="@dimen/btn_height_medium"
+            android:text="@string/text_refresh_price"
+            />
+</LinearLayout>

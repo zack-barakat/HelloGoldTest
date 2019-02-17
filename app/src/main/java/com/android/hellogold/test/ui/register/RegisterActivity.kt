@@ -5,7 +5,9 @@ import com.android.hellogold.test.R
 import com.android.hellogold.test.extensions.onTextChanged
 import com.android.hellogold.test.ui.base.BaseMvpActivity
 import com.android.hellogold.test.ui.base.BasePresenter
+import com.android.hellogold.test.ui.dashboard.DashboardActivity
 import kotlinx.android.synthetic.main.activity_register.*
+import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 class RegisterActivity : BaseMvpActivity(), RegisterContracts.View {
@@ -41,6 +43,7 @@ class RegisterActivity : BaseMvpActivity(), RegisterContracts.View {
         tiEmail.error = error
     }
 
-    override fun openMainScreen() {
+    override fun openDashboardScreen() {
+        startActivity<DashboardActivity>()
     }
 }
