@@ -14,6 +14,7 @@ import com.android.hellogold.test.di.module.TestApplicationModule;
 import com.android.hellogold.test.di.module.TestDataManagerModule;
 import com.android.hellogold.test.di.qualifiers.ApplicationContext;
 import com.android.hellogold.test.di.scopes.ApplicationScope;
+import com.android.hellogold.test.mvp.DashboardPresenterTest;
 import com.android.hellogold.test.mvp.RegisterPresenterTest;
 import com.android.hellogold.test.mvp.SplashPresenterTest;
 import com.android.hellogold.test.testCase.AppRobolectricTestCase;
@@ -34,9 +35,11 @@ public interface TestApplicationComponent extends ApplicationComponent {
 
     void inject(AppRobolectricTestCase appRobolectricTestCase);
 
+    void inject(SplashPresenterTest splashPresenterTest);
+
     void inject(RegisterPresenterTest registerPresenterTest);
 
-    void inject(SplashPresenterTest splashPresenterTest);
+    void inject(DashboardPresenterTest splashPresenterTest);
 
     @Component.Builder
     interface Builder {
